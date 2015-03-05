@@ -21,7 +21,7 @@ module MAL
 end
 
 loop do
-  line = Readline.readline("user> ", add_history = true).chomp
+  line = Readline.readline("user> ", add_history = true)
   puts MAL.rep(line)
   break unless line
 end
