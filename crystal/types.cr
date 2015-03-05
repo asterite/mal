@@ -3,6 +3,18 @@ module MAL
     def as_number
       raise "#{self} is not a Number"
     end
+
+    def as_symbol
+      raise "#{self} is not a Symbol"
+    end
+
+    def as_function
+      raise "#{self} is not a Function"
+    end
+
+    def elements
+      raise "#{self} is not a List or vector"
+    end
   end
 
   class Nil < Type
@@ -79,6 +91,10 @@ module MAL
 
     def initialize(@value)
     end
+
+    def as_symbol
+      self
+    end
   end
 
   class Function < Type
@@ -91,6 +107,10 @@ module MAL
 
     def call(args)
       @function.call(args)
+    end
+
+    def as_function
+      self
     end
   end
 end
