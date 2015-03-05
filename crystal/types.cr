@@ -12,6 +12,10 @@ module MAL
       raise "#{self} is not a Function"
     end
 
+    def as_list
+      raise "#{self} is not a List"
+    end
+
     def elements
       raise "#{self} is not a List or vector"
     end
@@ -19,14 +23,26 @@ module MAL
 
   class Nil < Type
     INSTANCE = new
+
+    def_equals
   end
 
   class True < Type
     INSTANCE = new
+
+    def_equals
   end
 
   class False < Type
     INSTANCE = new
+
+    def_equals
+  end
+
+  module Bool
+    def self.new(value)
+      value ? True::INSTANCE : False::INSTANCE
+    end
   end
 
   class Number < Type
@@ -38,6 +54,8 @@ module MAL
     def as_number
       self
     end
+
+    def_equals value
   end
 
   class String < Type
@@ -45,6 +63,8 @@ module MAL
 
     def initialize(@value)
     end
+
+    def_equals value
   end
 
   class Keyword < Type
@@ -52,6 +72,8 @@ module MAL
 
     def initialize(@value)
     end
+
+    def_equals value
   end
 
   class List < Type
@@ -70,12 +92,32 @@ module MAL
     def [](index)
       @elements[index]
     end
+
+    def []?(index)
+      @elements[index]?
+    end
+
+    def as_list
+      self
+    end
+
+    def_equals elements
+
+    def ==(other : Vector)
+      elements == other.elements
+    end
   end
 
   class Vector < Type
     getter elements
 
     def initialize(@elements)
+    end
+
+    def_equals elements
+
+    def ==(other : List)
+      elements == other.elements
     end
   end
 
@@ -84,6 +126,8 @@ module MAL
 
     def initialize(@elements)
     end
+
+    def_equals elements
   end
 
   class Symbol < Type
@@ -95,6 +139,8 @@ module MAL
     def as_symbol
       self
     end
+
+    def_equals value
   end
 
   class Function < Type
