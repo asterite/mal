@@ -37,23 +37,23 @@ class MAL::Reader
       Nil::INSTANCE
     when "'"
       self.next
-      List.new [Symbol.new("quote"), read_form]
+      List.new Symbol.new("quote"), read_form
     when "`"
       self.next
-      List.new [Symbol.new("quasiquote"), read_form]
+      List.new Symbol.new("quasiquote"), read_form
     when "~"
       self.next
-      List.new [Symbol.new("unquote"), read_form]
+      List.new Symbol.new("unquote"), read_form
     when "~@"
       self.next
-      List.new [Symbol.new("splice-unquote"), read_form]
+      List.new Symbol.new("splice-unquote"), read_form
     when "^"
       self.next
       meta = read_form
-      List.new [Symbol.new("with-meta"), read_form, meta]
+      List.new Symbol.new("with-meta"), read_form, meta
     when "@"
       self.next
-      List.new [Symbol.new("deref"), read_form]
+      List.new Symbol.new("deref"), read_form
     when "("
       read_list
     when ")"
@@ -109,7 +109,7 @@ class MAL::Reader
     when .starts_with?('"')
       String.new(token[1 ... -1].gsub(/\\\"/, "\""))
     when .starts_with?(':')
-      Keyword.new(token[1 ... -1])
+      Keyword.new(token[1 .. -1])
     when "nil"
       Nil::INSTANCE
     when "true"
