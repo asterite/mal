@@ -91,4 +91,10 @@ module MAL
       io << "#"
     end
   end
+
+  class MalFunction < Type
+    def to_s(io : IO, readably : ::Bool)
+      io << "#"
+    end
+  end
 end

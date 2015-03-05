@@ -144,11 +144,7 @@ module MAL
   end
 
   class Function < Type
-    def self.new(&function : Array(Type) -> Type)
-      new function
-    end
-
-    def initialize(@function)
+    def initialize(&@function : Array(Type) -> Type)
     end
 
     def call(args)
@@ -157,6 +153,16 @@ module MAL
 
     def as_function
       self
+    end
+  end
+
+  class MalFunction < Type
+    getter ast
+    getter params
+    getter env
+
+    def initialize(@ast, @params, @env, &function : Array(Type) -> Type)
+      @function = Function.new(&function)
     end
   end
 end
