@@ -1,10 +1,13 @@
 require "readline"
+require "./types"
+require "./reader"
+require "./printer"
 
 module MAL
   extend self
 
   def read(arg)
-    arg
+    Reader.read(arg)
   end
 
   def eval(arg)
@@ -21,7 +24,7 @@ module MAL
 end
 
 loop do
-  line = Readline.readline("user> ", add_history = true).chomp
-  puts MAL.rep(line)
+  line = Readline.readline("user> ", add_history = true)
   break unless line
+  puts MAL.rep(line)
 end

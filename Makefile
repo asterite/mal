@@ -116,7 +116,7 @@ rust_RUNSTEP =    ../$(2) $(3)
 scala_RUNSTEP =   sbt 'run-main $($(1))$(if $(3), $(3),)'
 vb_RUNSTEP =      mono ../$(2) --raw $(3)
 nim_RUNSTEP =     ../$(2) $(3)
-crystal_RUNSTEP =     ../$(2) $(3)
+crystal_RUNSTEP = crystal ../$(2) $(3)
 
 # Extra options to pass to runtest.py
 cs_TEST_OPTS =  --mono
