@@ -12,7 +12,7 @@ PYTHON = python
 
 IMPLS = bash c clojure coffee cs forth go haskell java js lua make mal \
 	ocaml matlab miniMAL perl php ps python r racket ruby rust \
-	scala vb nim
+	scala vb nim crystal
 
 step0 = step0_repl
 step1 = step1_read_print
@@ -81,6 +81,7 @@ rust_STEP_TO_PROG =    rust/target/release/$($(1))
 scala_STEP_TO_PROG =   scala/$($(1)).scala
 vb_STEP_TO_PROG =      vb/$($(1)).exe
 nim_STEP_TO_PROG =     nim/$($(1))
+crystal_STEP_TO_PROG = crystal/$($(1)).cr
 
 # Needed some argument munging
 COMMA = ,
@@ -115,6 +116,7 @@ rust_RUNSTEP =    ../$(2) $(3)
 scala_RUNSTEP =   sbt 'run-main $($(1))$(if $(3), $(3),)'
 vb_RUNSTEP =      mono ../$(2) --raw $(3)
 nim_RUNSTEP =     ../$(2) $(3)
+crystal_RUNSTEP =     ../$(2) $(3)
 
 # Extra options to pass to runtest.py
 cs_TEST_OPTS =  --mono
