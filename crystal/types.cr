@@ -21,7 +21,11 @@ module MAL
     end
 
     def elements
-      raise "#{self} is not a List or vector"
+      raise "#{self} is not a List or Vector"
+    end
+
+    def symbol?(name)
+      false
     end
   end
 
@@ -142,6 +146,10 @@ module MAL
     getter value
 
     def initialize(@value)
+    end
+
+    def symbol?(name)
+      value == name
     end
 
     def as_symbol

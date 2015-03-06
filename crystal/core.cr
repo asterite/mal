@@ -53,5 +53,19 @@ module MAL
     "slurp": Function.new do |args|
       String.new(File.read(args[0].as_string.value))
     end,
+
+    "cons": Function.new do |args|
+      elems = args[1].elements
+      new_elems = Array(Type).new(elems.length + 1)
+      new_elems << args[0]
+      new_elems.concat elems
+      List.new(new_elems)
+    end,
+
+    "concat": Function.new do |args|
+      List.new(args.each_with_object([] of Type) do |arg, elems|
+        elems.concat arg.elements
+      end)
+    end,
   }
 end
