@@ -8,6 +8,10 @@ module MAL
       raise "#{self} is not a Symbol"
     end
 
+    def as_string
+      raise "#{self} is not a String"
+    end
+
     def as_function
       raise "#{self} is not a Function"
     end
@@ -62,6 +66,10 @@ module MAL
     getter value
 
     def initialize(@value)
+    end
+
+    def as_string
+      self
     end
 
     def_equals value

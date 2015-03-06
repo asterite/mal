@@ -45,5 +45,13 @@ module MAL
       end)
       Nil::INSTANCE
     end,
+
+    "read-string": Function.new do |args|
+      Reader.read(args[0].as_string.value)
+    end,
+
+    "slurp": Function.new do |args|
+      String.new(File.read(args[0].as_string.value))
+    end,
   }
 end
